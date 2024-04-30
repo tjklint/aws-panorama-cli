@@ -176,7 +176,7 @@ Now we can add the model by passing in the path to the descriptor file which we 
 
 If you want to download the model from S3 and then add it pass `--model-s3-uri` as shown below. Otherwise just use `--model-local-path` to pass the local model path instead.
 
-`--packages-path` can be used to pass all the packges where this model is being used and after downloading the model, DX CLI automatically adds the downloaded model into assets section of all the specified packages.
+`--packages-path` can be used to pass all the packages where this model is being used and after downloading the model, DX CLI automatically adds the downloaded model into assets section of all the specified packages.
 
 ```Shell
 $ panorama-cli add-raw-model --model-asset-name callable_squeezenet --model-s3-uri s3://<s3_bucket_path>/raw_models/squeezenet1_0.tar.gz --descriptor-path packages/accountXYZ-call_node-1.0/descriptor.json --packages-path packages/accountXYZ-call_node-1.0
@@ -194,7 +194,7 @@ Successfully downloaded compiled artifacts (s3://<s3_bucket_path>/squeezenet1_0.
 }
 ```
 
-If you make any updates to your model or `desriptor.json` file after running this command, just re-run the command with the same `--model-asset-name` and the old asset will be updated with the new assets.
+If you make any updates to your model or `descriptor.json` file after running this command, just re-run the command with the same `--model-asset-name` and the old asset will be updated with the new assets.
 
 #### Writing code and building a container
 
@@ -268,7 +268,7 @@ Let's take a look at how the `package.json` looks for people_counter package aft
 }
 ```
 
-A new asset named `people_counter_container_binary` has been added under assets and a new interface named `people_counter_container_binary_interface` has been defined. In Panorama, interfaces are a way to programtically interact with a package and each interface is linked to an asset. For example, `people_counter_container_binary_interface` has an asset field which points to `people_counter_container_binary`. That means that we are defining an interface to that asset. In this case, since our asset is a container with your code in it, all the inputs your code expects can be part of the inputs under interfaces. In this example, the code just expects one input which is a video stream. If output of your code needs to be consumed by another asset, that can be part of the ouputs. Similarly, a new interface was added to the call-node package when we can `add-raw-model` command. In that case, interface was linked to the model asset which we added using that command.
+A new asset named `people_counter_container_binary` has been added under assets and a new interface named `people_counter_container_binary_interface` has been defined. In Panorama, interfaces are a way to programmatically interact with a package and each interface is linked to an asset. For example, `people_counter_container_binary_interface` has an asset field which points to `people_counter_container_binary`. That means that we are defining an interface to that asset. In this case, since our asset is a container with your code in it, all the inputs your code expects can be part of the inputs under interfaces. In this example, the code just expects one input which is a video stream. If output of your code needs to be consumed by another asset, that can be part of the ouputs. Similarly, a new interface was added to the call-node package when we can `add-raw-model` command. In that case, interface was linked to the model asset which we added using that command.
 
 At this point, `graph.json` under the graphs directory looks like this
 
